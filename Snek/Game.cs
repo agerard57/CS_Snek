@@ -6,24 +6,33 @@ using System.Threading.Tasks;
 
 namespace Snek
 {
-    internal class Game
+    public class Game
     {
-        private static void Main(string[] args)
+        public List<Player> Players { get; set; }
+        public int CurrentPlayer { get; set; }
+
+        public Game()
         {
-            Player[] players = new Player[2];
-            players[0] = new Player();
-            players[1] = new Player();
+            Players = new List<Player>();
+            CurrentPlayer = 0;
+        }
+
+        public void CreateGame()
+        {
+            Players.Add(new Player("Player 1"));
+            Players.Add(new Player("Player 2"));
 
             while (true)
             {
-                foreach (Player player in players)
+                foreach (Player player in Players)
                 {
-                    Console.WriteLine($"Player {Array.IndexOf(players, player) + 1} - Press enter to roll the dice :)");
+                    Console.WriteLine($"{player.Name} - Press enter to roll the dice :)");
                     Console.ReadLine();
                     int dice = Dice.Roll();
                     Console.WriteLine($"You rolled a {dice}");
                     player.Score += dice;
                     Console.WriteLine($"Your score is {player.Score}");
+
                     if (player.Score == 50)
                     {
                         Console.WriteLine("You won!");
