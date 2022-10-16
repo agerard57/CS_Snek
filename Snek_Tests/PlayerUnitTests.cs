@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.TestPlatform.ObjectModel;
-using Snek;
+﻿using Snek;
 
 namespace Snek_Tests
 {
