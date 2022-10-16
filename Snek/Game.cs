@@ -1,6 +1,4 @@
-﻿using System.Numerics;
-
-namespace Snek
+﻿namespace Snek
 {
     public class Game
     {
@@ -20,16 +18,33 @@ namespace Snek
         public void CreateGame()
         {
             Console.WriteLine("Welcome to Snek!");
+
+            PlayersInitializer();
+
+            GameInProgress = true;
+
+            GameLoop();
+
+            PlayAgain();
+        }
+
+        public void PlayersInitializer()
+        {
             NumberOfPlayers = NumberOfPlayersInput();
 
             for (int i = 0; i < int.Parse(NumberOfPlayers); i++)
                 PlayersName(i);
+        }
 
-            GameInProgress = true;
+        public string NumberOfPlayersInput()
+        {
+            while (!int.TryParse(NumberOfPlayers, out int number) || number < 2 || number > 4)
+            {
+                Console.WriteLine("Please enter the number of players (between 2 and 4)");
+                NumberOfPlayers = Console.ReadLine();
+            }
 
-            while (GameInProgress)
-                GameLoop();
-            PlayAgain();
+            return NumberOfPlayers;
         }
 
         private void PlayersName(int i)
@@ -43,35 +58,25 @@ namespace Snek
             Players.Add(new Player(name));
         }
 
-        private string NumberOfPlayersInput()
-        {
-            while (!int.TryParse(NumberOfPlayers, out int number) || number < 2 || number > 4)
-            {
-                Console.WriteLine("Please enter the number of players (between 2 and 4)");
-                NumberOfPlayers = Console.ReadLine();
-            }
-
-            return NumberOfPlayers;
-        }
-
         private void GameLoop()
         {
-            foreach (Player player in Players)
-            {
-                Console.WriteLine($"{player.Name} - Press enter to roll the dice :)");
-                Console.ReadLine();
-                int dice = new Dice().Roll();
-                Console.WriteLine($"You rolled a {dice}");
-                player.AddScore(dice);
-                player.Thirty();
-                player.OverFifty();
-                EndGame(player);
-                if (GameInProgress == false)
-                    break;
-            }
+            while (GameInProgress)
+                foreach (Player player in Players)
+                {
+                    Console.WriteLine($"{player.Name} - Press enter to roll the dice :)");
+                    Console.ReadLine();
+                    int dice = new Dice().Roll();
+                    Console.WriteLine($"You rolled a {dice}");
+                    player.AddScore(dice);
+                    player.Thirty();
+                    player.OverFifty();
+                    EndGame(player);
+                    if (GameInProgress == false)
+                        break;
+                }
         }
 
-        private void EndGame(Player player)
+        public void EndGame(Player player)
         {
             if (player.Score == 50)
             {
