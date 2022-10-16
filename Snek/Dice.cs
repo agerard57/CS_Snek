@@ -2,9 +2,9 @@
 {
     public class Dice
     {
-        public static int Roll()
+        public int Roll()
         {
-            Random random = new();
+            Random random = new Random();
             return random.Next(1, 7);
         }
     }
