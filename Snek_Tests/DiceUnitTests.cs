@@ -6,14 +6,14 @@ namespace Snek_Tests
     public class DiceUnitTests
     {
         [TestMethod]
-        public void TestDiceRoll()
+        public void DiceRollTest()
         {
             int roll = new Dice().Roll();
             Assert.IsTrue(roll >= 1 && roll <= 6);
         }
 
         [TestMethod]
-        public void TestAllPossibleDiceRoll()
+        public void AllPossibleDiceRollsTest()
         {
             bool[] AllPossibleRolls = new bool[6] { false, false, false, false, false, false };
             while (AllPossibleRolls.Contains(false))
