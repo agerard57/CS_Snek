@@ -34,7 +34,6 @@ namespace Snek_Tests
         {
             // Depending on numberOfPlayers, create FedInput with this format
             // "numberOfPlayers\r\nPlayer1Name\r\nPlayer2Name\r\nPlayer3Name\r\nPlayer4Name"
-
             string FedInput = string.Format("{0}\r\n", NumberOfPlayers);
             for (int i = 0; i < NumberOfPlayers; i++)
                 FedInput += string.Format("TestPlayer{0}\r\n", i + 1);
@@ -62,7 +61,6 @@ namespace Snek_Tests
 
             // Check that "Please enter the number of players (between 2 and 4)" appears twice.
             // If the incorrect input is handled, then the message should appear again
-
             String Message = "Please enter the number of players (between 2 and 4)";
             Assert.AreEqual(string.Format("{0}\r\n{0}\r\n", Message), stringWriter.ToString());
         }
