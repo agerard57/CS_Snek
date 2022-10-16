@@ -1,6 +1,4 @@
-﻿using System.Numerics;
-
-namespace Snek
+﻿namespace Snek
 {
     public class Player
     {
